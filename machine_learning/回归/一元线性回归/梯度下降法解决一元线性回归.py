@@ -61,6 +61,6 @@ print('迭代{}次后， b = {}, k = {}, error = {}'.format(epochs, b, k, comput
 
 # 画出图像
 plt.plot(x_data, y_data, 'b.')
-# 画出回归直线
+# 画出回归直线,在同一张图上画
 plt.plot(x_data, k * x_data + b, 'r')
 plt.show()
