@@ -4,7 +4,7 @@
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D  # 这个是可以用来画3D图的
+# from mpl_toolkits.mplot3d import Axes3D  # 这个是可以用来画3D图的
 
 '''做法和解决一元线性回归是类似的'''
 
