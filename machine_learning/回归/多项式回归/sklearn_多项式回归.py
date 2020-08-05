@@ -45,3 +45,16 @@ plt.title('Polynomial Regression')
 plt.xlabel('Position Level')
 plt.ylabel('Salary')
 plt.show()
+
+'''如果上面画出来10个点的线不够平滑，可以增加自变量，让他平滑一些'''
+
+# 画图
+plt.plot(x_data, y_data, 'b.')
+x_test = np.linspace(1, 10, 50)  # 表示从1到10，之间有50个点
+x_test = x_test[:, np.newaxis]
+x_poly = poly.fit_transform(x_test)  # 一定要处理特征
+plt.plot(x_test, lin_reg.predict(x_poly), 'r')  # predict 传的是x_poly,是处理后的数据
+plt.title('Polynomial Regression')
+plt.xlabel('Position Level')
+plt.ylabel('Salary')
+plt.show()
