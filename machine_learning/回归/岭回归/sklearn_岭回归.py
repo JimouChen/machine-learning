@@ -35,7 +35,7 @@ plt.plot(alphas_test, model.cv_values_.mean(axis=0))
 plt.plot(model.alpha_, min(model.cv_values_.mean(axis=0)), 'ro')
 plt.show()
 
-# 现在对每一行做预测
+# 现在对每一行做预测，做对比
 print(y_data)
 for i in range(len(x_data)):
     print(model.predict(x_data[i, np.newaxis]), end='  ')
