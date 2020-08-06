@@ -90,10 +90,13 @@ X_data = np.concatenate((np.ones((100, 1)), x_data), axis=1)
 ws, costList = gradAscent(X_data, y_data)
 print(ws)
 
-if scale == False:
+# 不做数据标准化时，才画出这个图
+if not scale:
     # 画图决策边界
     split_plot()
     x_test = [[-4], [3]]
+    # 这里ws[0],ws[1],ws[2]满足ws[0]+ws[1]*x+ws[2]*y = 0
+    # 而这条线就是两个类别的分界线
     y_test = (-ws[0] - x_test * ws[1]) / ws[2]
     plt.plot(x_test, y_test, 'k')
     plt.show()
@@ -117,7 +120,4 @@ def predict(x_data, ws):
 
 
 predictions = predict(X_data, ws)
-
 print(classification_report(y_data, predictions))
-
-
