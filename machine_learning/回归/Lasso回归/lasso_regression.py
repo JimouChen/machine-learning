@@ -30,3 +30,9 @@ for i in range(len(x_data)):
     # print(model.predict(x_data[i, np.newaxis]))
 
 print('\n', y_predict_data)
+
+# 画图对比
+x_year = (np.linspace(1947, 1962, len(x_data)))
+plt.plot(x_year, y_data, 'b.')
+plt.plot(x_year, y_predict_data, 'r')
+plt.show()
