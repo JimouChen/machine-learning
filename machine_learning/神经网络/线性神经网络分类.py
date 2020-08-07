@@ -32,15 +32,17 @@ def update_weight():
     W = W + theta_w
 
 
-for i in range(100):
+# 通过增加循环次数，使得分类效果越好
+for i in range(1000):
     update_weight()
-    print('第{}次迭代：'.format(i))
-    print(W)
-    out = np.dot(X, W)  # 计算当前输出
+    # print('第{}次迭代：'.format(i))
+    # print(W)
+    # out = np.dot(X, W)  # 计算当前输出
+    # 其实这里是没有用的因为实际要达到和预测一样相差太远了，所以可以直接通过迭代次数来规定收敛
     # .all()只有输出的所有预测值都与实际输出一样，才说明模型收敛，循环结束
-    if (out == Y).all():
-        print('Finished , epoch:', i)
-        break
+    # if (out == Y).all():
+    #     print('Finished , epoch:', i)
+    #     break
 
 
 '''上面迭代到最后一次时，W就可以确定分界线的截距和效率了'''
