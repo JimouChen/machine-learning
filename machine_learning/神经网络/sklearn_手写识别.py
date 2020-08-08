@@ -23,3 +23,5 @@ model.fit(x_train, y_train)
 # 评估
 prediction = model.predict(x_test)
 print(classification_report(y_test, prediction))
+print('origin：\n', y_test)
+print('predict result:\n', prediction)
