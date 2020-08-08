@@ -42,7 +42,7 @@ def calculate(x, root_num):
 
 
 # 通过增加循环次数，使得分类效果越好
-for i in range(1000):
+for i in range(10000):
     update_weight()
 
 '''上面迭代到最后一次时，W就可以确定分界线的截距和效率了'''
@@ -63,3 +63,7 @@ plt.plot(x_range, calculate(x_range, 2), 'r')
 plt.plot(x1, y1, 'bo')
 plt.plot(x2, y2, 'yo')
 plt.show()
+
+# 看一下预测结果,迭代次数越多，预测结果越精确
+out = np.dot(X, W.T)
+print(out)
