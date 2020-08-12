@@ -8,7 +8,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from mlxtend.classifier import StackingClassifier  # 导入Stacking模型分类器
-import numpy as np
 
 # 载入数据集
 iris = datasets.load_iris()
