@@ -5,6 +5,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import MiniBatchKMeans
+from sklearn.metrics import classification_report
 
 '''适用于数据多的情况，但是一般情况还是用KMeans'''
 
