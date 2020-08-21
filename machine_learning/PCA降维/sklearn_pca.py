@@ -28,7 +28,8 @@ print(classification_report(prediction, y_text))
 print(confusion_matrix(prediction, y_text))
 # 进行pca降维,这里n_components是降成2维
 pca = PCA(n_components=2)
-new_data = pca.fit_transform(x_data)  # 直接返回降维后的数据
+# 直接返回降维后的数据,如果不返回新数据，就用fit
+new_data = pca.fit_transform(x_data)
 print(new_data)
 
 # 画出降维后的数据
