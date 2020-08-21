@@ -7,9 +7,8 @@ from sklearn.datasets import load_digits  # 手写数据集
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA  # 导入PCA模型
 from sklearn.metrics import classification_report, confusion_matrix
-import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
 
 digits = load_digits()
 x_data = digits.data  # 数据
