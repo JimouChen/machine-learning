@@ -4,14 +4,13 @@
 """
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn import svm
 from sklearn.metrics import classification_report
 
 
-data = pd.read_csv('data/wine.csv')
+data = pd.read_csv('wine.csv')
 y_data = data.iloc[:, 0]
 x_data = data.iloc[:, 1:]
 
@@ -23,8 +22,10 @@ new_data = pca.fit_transform(x_data)
 plt.scatter(new_data[:, 0], new_data[:, 1], c=y_data)
 plt.show()
 
-# 建模预测
-model = svm.SVC(decision_function_shape='ovo')
+# 建模预测,多分类的三种方法，ovr有时候会警告
+# model = svm.SVC(decision_function_shape='ovo')
+model = svm.SVC(decision_function_shape='ovr')
+# model = svm.SVC(probability=True)
 model.fit(x_train, y_train)
 
 prediction = model.predict(x_data)
