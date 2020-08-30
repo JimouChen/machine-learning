@@ -22,7 +22,7 @@ new_data = pca.fit_transform(x_data)
 plt.scatter(new_data[:, 0], new_data[:, 1], c=y_data)
 plt.show()
 
-# 建模预测,多分类的三种方法，ovr有时候会警告
+# 建模预测,多分类的三种方法，有时候会警告，但是不影响
 # model = svm.SVC(decision_function_shape='ovo')
 model = svm.SVC(decision_function_shape='ovr')
 # model = svm.SVC(probability=True)
