@@ -52,6 +52,7 @@ plt.show()
 
 pca = PCA(n_components=3)
 new_data = pca.fit_transform(x_data)
+# print(new_data)
 # 画出降维后的数据
 new_x_data = new_data[:, 0]
 new_y_data = new_data[:, 1]
