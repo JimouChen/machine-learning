@@ -48,5 +48,6 @@ def newton_update_x(x, epochs):
             return x
 
 
-res = newton_update_x(4, 100)
-print('牛顿法求得的解为: x =', res)
+if __name__ == '__main__':
+    res = newton_update_x(4, 100)
+    print('牛顿法求得的解为: x =', res)
