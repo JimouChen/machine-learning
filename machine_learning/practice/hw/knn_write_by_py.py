@@ -5,6 +5,7 @@
 import operator
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def kNN(x_test, x_data, y_data, k):
@@ -33,16 +34,13 @@ def kNN(x_test, x_data, y_data, k):
 
 
 if __name__ == '__main__':
-    # 找几个点试试
-    x_train = np.array([[1, 1], [2, 1.3], [3, 1.5], [4, 0.8], [5, 5], [6, 5.5], [7, 4.5]])
-    y_train = np.array([0, 0, 0, 0, 1, 1, 1])
-    # 测试点
-    x_test = np.array([[5, 4.5]])
+    data = pd.read_csv('data.csv')
+    x_data = data.iloc[:, :-1]
+    y_data = data.iloc[:, -1]
+    x_test = np.array([5, 5])
+    y_test = kNN(x_test, x_data, y_data, 3)
+    print('测试点识别的类别是:', y_test)
 
-    # 画出散点图
-    plt.scatter(x_test[0][0], x_test[0][1], c='r')
-    plt.scatter(x_train[:, 0], x_train[0:, 1], c=y_train)
+    plt.scatter(x_data.iloc[:, 0], x_data.iloc[:, 1], s=100)
+    plt.scatter(x_test[0], x_test[1], c='r', s=100)
     plt.show()
-
-    class_test = (kNN(x_test[0], x_train, y_train, 3))
-    print('预测的类别是：', class_test)

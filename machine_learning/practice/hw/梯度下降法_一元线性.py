@@ -30,10 +30,6 @@ if __name__ == '__main__':
     # 生成数据，加入少量噪点
     x_data, y_data = make_regression(n_samples=200, noise=15, n_features=1, random_state=20)
 
-    # 画出分布图
-    plt.scatter(x_data, y_data)
-    plt.show()
-
     # 设置学习率learning rate,截距，斜率
     lr = 0.03
     b = 0
