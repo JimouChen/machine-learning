@@ -19,7 +19,7 @@ def f__(a, x):
 
 
 # x是一开始随便给的初始值
-def newton_update_x(a, b, c, x, epochs):
+def newton_update_x(a, b, x, epochs):
     for i in range(epochs):
         # 每次更新函数值和导数值
         func_ = f_(a, b, x)
@@ -39,6 +39,6 @@ if __name__ == '__main__':
     # 输入a，b，c
     a, b, c = map(int, input().split())
     random_x = 4
-    res_x = newton_update_x(a, b, c, random_x, 2)
+    res_x = newton_update_x(a, b, random_x, 2)
     print('牛顿法求得的最值处的坐标是: (%.3f, %.3f)' % (res_x, f(a, b, c, res_x)))
     print('求得的最值是:%.3f' % f(a, b, c, res_x))
