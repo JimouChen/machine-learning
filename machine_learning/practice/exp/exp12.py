@@ -4,7 +4,7 @@
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 
@@ -21,33 +21,30 @@ if __name__ == '__main__':
     # 生成数据特征
     x1, y1, data1 = product_num(400, 1, 0, 1, 0)
     x2, y2, data2 = product_num(400, 1, 1, 1.5, 4)
+    # x2, y2, data2 = product_num(400, 1, 1, 1.5, 1.5)
     x3, y3, data3 = product_num(400, 2, 8, 1, 5)
-    x4, y4, data4 = product_num(400, 0.5, 3, 0.5, 3)
 
-    # 设置标签，4个类
+    # 设置标签，3个类
     label1 = np.zeros(400, dtype=int)
     label2 = np.zeros(400, dtype=int) + 1
     label3 = np.zeros(400, dtype=int) + 2
-    label4 = np.zeros(400, dtype=int) + 3
 
     # 画图
     plt.scatter(x1, y1, c='b', marker='^', label='class1')
     plt.scatter(x2, y2, c='r', marker='v', label='class2')
-    plt.scatter(x3, y3, c='y', marker='<', label='class3')
-    plt.scatter(x4, y4, c='g', marker='>', label='class4')
+    plt.scatter(x3, y3, c='g', marker='<', label='class3')
     plt.legend()
     plt.show()
 
     # 合并特征和标签
-    data = np.concatenate((data1, data2, data3, data4), axis=0)
-    label = np.concatenate((label1, label2, label3, label4), axis=0)
+    data = np.concatenate((data1, data2, data3), axis=0)
+    label = np.concatenate((label1, label2, label3), axis=0)
 
     # 切分数据集
     x_train, x_test, y_train, y_test = train_test_split(data, label)
 
     # 建模拟合
     model = LinearRegression()
-    # model = LogisticRegression()
     model.fit(x_train, y_train)
 
     # 进行预测类别
