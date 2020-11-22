@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 
 data = np.genfromtxt('kmeans.txt', delimiter=' ')
 # 建模
-# esp距离阈值，min_samples在esp领域里面的样本数
+# esp距离阈值，min_samples在esp领域里面的样本数,
+# 也就是超过min_sample就可以当成一个类
 model = DBSCAN(eps=1.5, min_samples=4)
 model.fit(data)
 
