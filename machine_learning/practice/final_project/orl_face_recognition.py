@@ -4,11 +4,13 @@
 """
 from PIL import Image
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from sklearn.metrics import classification_report
-import pandas as pd
+# 得到模型的评估指标，F1-分数，召回率，ROC曲线，PR曲线
+from sklearn.metrics import classification_report, roc_curve, auc, f1_score, recall_score
+from sklearn.neural_network import MLPClassifier
 
 
 class FaceRecognition:
@@ -21,6 +23,8 @@ class FaceRecognition:
         """
         self.path = photo_path
         self.save_file = save_file
+        self.y_test = None
+        self.y_predict = None
         self.model = None  # 保存最终训练得到的模型
 
     # 处理数据，将图片数据转化为二维矩阵
@@ -66,7 +70,9 @@ class FaceRecognition:
         :return: 返回准确率和模型
         """
         x_data, y_data = self.load_data()
-        x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.3, random_state=random_state)
+        x_train, x_test, y_train, self.y_test = train_test_split(x_data, y_data,
+                                                                 test_size=0.3,
+                                                                 random_state=random_state)
 
         # 利用PCA将特征降至50维
         pca = PCA(n_components=n_components)
@@ -76,19 +82,37 @@ class FaceRecognition:
 
         # 利用在训练集上进行降维的PCA对测试数据进行降维，保证转换矩阵相同
         x_test_pca = pca.transform(x_test)
-        y_predict = self.model.predict(x_test_pca)
-        score = self.model.score(x_test_pca, y_test)
-        print(classification_report(y_test, y_predict))
+        self.y_predict = self.model.predict(x_test_pca)
+        score = self.model.score(x_test_pca, self.y_test)
+        # print(classification_report(self.y_test, self.y_predict))
+
+        # bp = MLPClassifier(hidden_layer_sizes=(377, 82), max_iter=600)
+        for i in range(450, 600, 10):
+            bp = MLPClassifier(hidden_layer_sizes=(500, 300),
+                               max_iter=i,
+                               solver='adam',
+                               random_state=15)
+            bp.fit(x_train, y_train)
+            print('迭代{}次，使用BP神经网络在测试集上的准确率为:{}'.format(i, bp.score(x_test_pca, self.y_test)))
 
         return score, self.model
 
-    # 画PR图
-    def draw_PR(self):
-        pass
-
     # 画ROC图
     def draw_ROC(self):
-        pass
+        fpr, tpr, thresholds = roc_curve(self.y_test, self.y_predict, pos_label=40)
+        roc_auc = auc(fpr, tpr)
+        plt.title('ROC')
+        plt.plot(fpr, tpr, 'b', label='AUC = %0.4f' % roc_auc)
+        plt.legend(loc='lower right')
+        plt.plot([0, 1], [0, 1], 'r--')
+        plt.ylabel('TPR')
+        plt.xlabel('FPR')
+        plt.show()
+
+    # 返回模型评估参数
+    def model_evaluation(self):
+        print('recall: %.4f' % recall_score(self.y_test, self.y_predict, average='micro'))
+        print('f1-score: %.4f' % f1_score(self.y_test, self.y_predict, average='micro'))
 
 
 if __name__ == '__main__':
@@ -101,7 +125,10 @@ if __name__ == '__main__':
     recognition.load_data()
     acc, model = recognition.train_model(50, 14)
     print('测试集上的预测准确率为:{}'.format(acc))
+    recognition.draw_ROC()
+    recognition.model_evaluation()
 
+    # 调参
     # l = []
     # for i in range(10, 30):
     #     print(i, end=': ')
