@@ -8,12 +8,11 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-# 得到模型的评估指标，F1-分数，召回率，ROC曲线，PR曲线
+# 得到模型的评估指标，F1-分数，召回率，ROC曲线
 from sklearn.metrics import classification_report, roc_curve, auc, f1_score, recall_score
 
 
 class FaceRecognition:
-
     # 初始化参数
     def __init__(self, photo_path, save_file='yale_data.txt'):
         """
@@ -110,7 +109,7 @@ if __name__ == '__main__':
     save_file = 'yale_data.txt'
     recognition = FaceRecognition(photo_path=photo_path, save_file=save_file)
 
-    # recognition.handle_data()
+    recognition.handle_data()
     recognition.load_data()
 
     acc, model = recognition.train_model()

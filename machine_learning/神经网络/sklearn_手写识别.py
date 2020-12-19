@@ -2,7 +2,7 @@
 # @Time    :  2020/8/8
 # @Author  :  Jimou Chen
 """
-from sklearn.datasets import load_digits  # 导入数据就
+from sklearn.datasets import load_digits  # 导入数据集
 from sklearn.neural_network import MLPClassifier  # 导入神经网络模型
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report

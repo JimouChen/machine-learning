@@ -10,7 +10,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 # 得到模型的评估指标，F1-分数，召回率，ROC曲线，PR曲线
 from sklearn.metrics import classification_report, roc_curve, auc, f1_score, recall_score
-from sklearn.neural_network import MLPClassifier
 
 
 class FaceRecognition:
@@ -84,16 +83,19 @@ class FaceRecognition:
         x_test_pca = pca.transform(x_test)
         self.y_predict = self.model.predict(x_test_pca)
         score = self.model.score(x_test_pca, self.y_test)
-        # print(classification_report(self.y_test, self.y_predict))
+        print(classification_report(self.y_test, self.y_predict))
 
-        # bp = MLPClassifier(hidden_layer_sizes=(377, 82), max_iter=600)
+        '''
+        测试其他算法实现人脸识别，以BP神经网络分类为例
+        from sklearn.neural_network import MLPClassifier
         for i in range(450, 600, 10):
-            bp = MLPClassifier(hidden_layer_sizes=(500, 300),
-                               max_iter=i,
-                               solver='adam',
-                               random_state=15)
-            bp.fit(x_train, y_train)
-            print('迭代{}次，使用BP神经网络在测试集上的准确率为:{}'.format(i, bp.score(x_test_pca, self.y_test)))
+        bp = MLPClassifier(hidden_layer_sizes=(500, 300),
+                           max_iter=i,
+                           solver='adam',
+                           random_state=15)
+        bp.fit(x_train, y_train)
+        print('迭代{}次，使用BP神经网络在测试集上的准确率为:{}'.format(i, bp.score(x_test_pca, self.y_test)))
+        '''
 
         return score, self.model
 
